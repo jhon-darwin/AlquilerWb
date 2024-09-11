@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Ver pagos realizados
     document.getElementById('viewPayments').onclick = function() {
-        window.open('alquiler_pagos.html', '_blank');
+        window.open('payments.html', '_blank');
     }
 
     // Función para generar un código aleatorio

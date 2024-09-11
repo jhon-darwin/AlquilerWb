@@ -15,6 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Botón para volver a la página principal
     document.getElementById('goBack').onclick = function() {
-        window.location.href = 'alquiler_index.html';
+        window.location.href = 'index.html';
     }
 });
