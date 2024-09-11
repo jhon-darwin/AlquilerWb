@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagos Realizados</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="alquiler_styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-list-alt"></i> Pagos Realizados</h1>
+        </header>
+        <main>
+            <div class="card">
+                <table id="paymentsTable">
+                    <thead>
+                        <tr>
+                            <th>Mes</th>
+                            <th>Receptor</th>
+                            <th>Monto</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Los pagos se agregarán dinámicamente con JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            <button id="goBack" class="btn-primary"><i class="fas fa-arrow-left"></i> Volver</button>
+        </main>
+    </div>
+    <script src="alquiler_pagos_script.js"></script>
+</body>
+</html>
