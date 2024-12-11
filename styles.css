@@ -26,13 +26,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 1rem;
 }
 
 .container {
     max-width: 1000px;
     width: 100%;
-    margin: 2rem;
-    padding: 2rem;
+    margin: 1rem auto;
+    padding: 1.5rem;
     background-color: var(--card-background);
     border-radius: 15px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
@@ -45,13 +46,13 @@ header {
 
 h1 {
     color: var(--primary-color);
-    font-size: 2.5rem;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
     margin-bottom: 0.5rem;
 }
 
 h2 {
     color: var(--secondary-color);
-    font-size: 1.8rem;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
     margin-bottom: 1rem;
 }
 
@@ -61,18 +62,33 @@ h2 {
     padding: 1.5rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-bottom: 2rem;
+    overflow: hidden;
 }
 
 .input-container {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .input-container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
 }
 
 .input-group {
     display: flex;
     flex-direction: column;
-    width: 48%;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .input-group {
+        width: 48%;
+    }
 }
 
 label {
@@ -81,25 +97,31 @@ label {
 }
 
 select, input[type="date"] {
-    padding: 10px;
+    padding: 0.75rem;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 1rem;
     background-color: #fff;
+    width: 100%;
 }
 
 .table-container {
+    width: 100%;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 1rem;
+    border-radius: 5px;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
     white-space: nowrap;
+    min-width: 600px;
 }
 
 th, td {
-    padding: 12px;
+    padding: 1rem;
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
@@ -109,6 +131,8 @@ th {
     color: white;
     font-weight: 600;
     text-transform: uppercase;
+    position: sticky;
+    top: 0;
 }
 
 tr:nth-child(even) {
@@ -124,32 +148,33 @@ tr:nth-child(even) {
     animation: blink 1s linear infinite;
 }
 
-@keyframes blink {
-    50% {
-        background-color: var(--warning-color);
-        color: white;
-    }
-}
-
 .button-group {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 1rem;
+    padding: 1rem 0;
 }
 
 button {
-    padding: 10px 20px;
+    padding: 0.75rem 1rem;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 600;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+    min-width: 120px;
+}
+
+@media (max-width: 480px) {
+    button {
+        width: 100%;
+    }
 }
 
 button:hover {
@@ -184,7 +209,7 @@ button:hover {
 .modal {
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
@@ -194,30 +219,31 @@ button:hover {
     animation: fadeIn 0.3s ease;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
 .modal-content {
     background-color: var(--card-background);
     margin: 10% auto;
     padding: 2rem;
     border-radius: 10px;
-    max-width: 500px;
     width: 90%;
+    max-width: 500px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     animation: slideIn 0.3s ease;
+    position: relative;
 }
 
-@keyframes slideIn {
-    from { transform: translateY(-50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+@media (max-width: 480px) {
+    .modal-content {
+        margin: 5% auto;
+        padding: 1rem;
+        width: 95%;
+    }
 }
 
 .close {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
     color: #aaa;
-    float: right;
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
@@ -235,10 +261,11 @@ button:hover {
 }
 
 .input-group input {
-    padding: 10px;
+    padding: 0.75rem;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 1rem;
+    width: 100%;
 }
 
 .input-group input:focus {
@@ -247,26 +274,159 @@ button:hover {
     box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
 }
 
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes blink {
+    50% {
+        background-color: var(--warning-color);
+        color: white;
+    }
+}
+/* [Previous CSS remains the same until the table styles] */
+
+/* Estilos específicos para la tabla de pagos */
+#paymentsTable {
+    width: 100%;
+    border-collapse: collapse;
+    white-space: nowrap;
+    min-width: 600px;
+}
+
+#paymentsTable th {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    position: sticky;
+    top: 0;
+}
+
+#paymentsTable td {
+    padding: 1rem;
+    border-bottom: 1px solid #ddd;
+}
+
+#paymentsTable tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+#paymentsTable tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* Contenedor para la tabla con scroll horizontal en móvil */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 1.5rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos responsivos para la página de pagos */
 @media (max-width: 768px) {
     .container {
-        margin: 1rem;
+        margin: 0.5rem;
         padding: 1rem;
     }
 
     h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
 
-    h2 {
+    #paymentsTable {
+        font-size: 0.9rem;
+    }
+
+    #paymentsTable th,
+    #paymentsTable td {
+        padding: 0.75rem;
+    }
+
+    #goBack {
+        width: 100%;
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        margin: 0;
+        border-radius: 0;
+    }
+
+    h1 {
         font-size: 1.5rem;
     }
 
-    .input-container {
-        flex-direction: column;
+    #paymentsTable th,
+    #paymentsTable td {
+        padding: 0.5rem;
+    }
+}
+
+/* Indicador de scroll horizontal en móvil */
+@media (max-width: 768px) {
+    .table-container::after {
+        content: '←→';
+        position: absolute;
+        bottom: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 1.2rem;
+        color: var(--text-color);
+        opacity: 0.5;
+        animation: scrollIndicator 2s infinite;
     }
 
-    .input-group {
-        width: 100%;
-        margin-bottom: 1rem;
+    @keyframes scrollIndicator {
+        0%, 100% { transform: translateX(-60%); }
+        50% { transform: translateX(-40%); }
+    }
+}
+
+/* Mejoras en la accesibilidad táctil */
+@media (hover: none) {
+    #paymentsTable td,
+    #paymentsTable th {
+        padding: 1rem;
+    }
+
+    #goBack {
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+}
+
+/* Estilos de impresión para la tabla de pagos */
+@media print {
+    .container {
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+    }
+
+    #goBack {
+        display: none;
+    }
+
+    .table-container {
+        overflow: visible;
+        box-shadow: none;
+    }
+
+    #paymentsTable {
+        min-width: auto;
     }
 }
